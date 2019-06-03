@@ -7,8 +7,9 @@
 <template>
     <div class="index">
         <div class="container">
-            <vInfoDrawer></vInfoDrawer>
+            <vInfoDrawer></vInfoDrawer><button @click="handleTest">emm</button>
             <v-card v-for="(item,index) in blogs" style="display:block" :key="index" :data="item"></v-card>
+            
         </div>
     </div>
 </template>
@@ -27,6 +28,11 @@
         methods: {
             getBlogs (page) {
                 $.ajax.get('/article/article_page/?page='+page).then(res=>{
+                    this.blogs = res.data;
+                })
+            },
+            handleTest () {
+                axios.get('http://blog.qnpic.top/article/article_page/?page=1').then(res=>{
                     this.blogs = res.data;
                 })
             }
